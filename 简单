@@ -1,0 +1,23 @@
+import requests
+from bs4 import BeautifulSoup
+
+# 目标网站的URL
+url = 'https://example.com'
+
+# 发送HTTP GET请求
+response = requests.get(url)
+
+# 检查请求是否成功
+if response.status_code == 200:
+    # 解析HTML内容
+    soup = BeautifulSoup(response.content, 'html.parser')
+    
+    # 打印页面标题
+    print('Page Title:', soup.title.string)
+    
+    # 打印所有段落文本
+    paragraphs = soup.find_all('p')
+    for p in paragraphs:
+        print(p.get_text())
+else:
+    print('Failed to retrieve the page. Status code:', response.status_code)
